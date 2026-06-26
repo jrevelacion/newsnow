@@ -1,62 +1,96 @@
 <!doctype html>
-<html lang="zh-CN" class="dark">
+
+<html lang="en" class="dark">
 
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/icon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <!-- SEO Meta Tags -->
-  <meta name="description" content="NewsNow - 实时新闻聚合阅读器，汇集全球热点新闻，提供优雅的阅读体验" />
-  <meta name="keywords" content="新闻,科技新闻,实时新闻,新闻聚合,NewsNow" />
-  <meta name="author" content="NewsNow" />
+
+<meta name="description"
+ content="RabbitMeow News Now - Your AI-powered source for breaking sports, entertainment, technology, and world news with intelligent summaries and real-time updates." />
+
+<meta name="keywords"
+ content="RabbitMeow News Now, sports news, football news, cricket news, NBA news, entertainment news, breaking news, AI news, world news, live updates" />
+
+  <meta name="author" content="RabbitMeow News Now" />
   <meta name="robots" content="index, follow" />
 
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="NewsNow - 优雅的新闻聚合阅读器" />
-  <meta property="og:description" content="实时新闻聚合阅读器，汇集全球热点新闻，提供优雅的阅读体验" />
+  <!-- Open Graph -->
+
+  <meta property="og:title" content="RabbitMeow News Now" />
+  <meta property="og:description"
+    content="Breaking sports, entertainment, technology, and world news powered by AI summaries and real-time updates." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://newsnow.busiyi.world" />
-  <meta property="og:image" content="https://newsnow.busiyi.world/og-image.png" />
+  <meta property="og:url" content="https://YOUR-DOMAIN.com" />
+  <meta property="og:image" content="https://YOUR-DOMAIN.com/og-image.png" />
+  <meta property="og:site_name" content="RabbitMeow News Now" />
 
-  <!-- Twitter Card Meta Tags -->
+  <!-- Twitter -->
+
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="NewsNow - 优雅的新闻聚合阅读器" />
-  <meta name="twitter:description" content="实时新闻聚合阅读器，汇集全球热点新闻，提供优雅的阅读体验" />
-  <meta name="twitter:image" content="https://newsnow.busiyi.world/og-image.svg" />
+  <meta name="twitter:title" content="RabbitMeow News Now" />
+  <meta name="twitter:description"
+    content="Breaking sports, entertainment, technology, and world news powered by AI summaries and real-time updates." />
+  <meta name="twitter:image" content="https://YOUR-DOMAIN.com/og-image.png" />
 
-  <meta name="theme-color" content="#F14D42" />
-  <link rel="preload" href="/Baloo2-Bold.subset.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+  <!-- Theme -->
 
-  <!-- Schema.org markup for Google -->
+  <meta name="theme-color" content="#8B0000" />
+
+  <link rel="preload"
+    href="/Baloo2-Bold.subset.ttf"
+    as="font"
+    type="font/ttf"
+    crossorigin>
+
+  <link rel="apple-touch-icon"
+    href="/apple-touch-icon.png"
+    sizes="180x180" />
+
+  <!-- Schema.org -->
+
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "NewsNow",
-      "url": "https://newsnow.busiyi.world",
-      "description": "实时新闻聚合阅读器，汇集全球热点新闻，提供优雅的阅读体验",
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"RabbitMeow News Now",
+    "url":"https://rmppv.xyz",
+    "description":"AI-powered sports, entertainment, technology, and world news platform delivering intelligent summaries and real-time updates.",
+    "publisher":{
+      "@type":"Organization",
+      "name":"RabbitMeow News Now"
     }
+  }
   </script>
 
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EL9HHYE5LC"></script>
+  <!-- Analytics -->
+
+  <!-- Replace with your own GA4 ID -->
+
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-EL9HHYE5LC');
+    gtag('config', 'G-XXXXXXXXXX');
   </script>
+  -->
 
   <script>
-    const query = new URLSearchParams(window.location.search)
+    const query = new URLSearchParams(window.location.search);
+
     if (query.has("login") && query.has("user") && query.has("jwt")) {
-      localStorage.setItem("user", query.get("user"))
-      localStorage.setItem("jwt", JSON.stringify(query.get("jwt")))
-      window.history.replaceState({}, document.title, window.location.pathname)
+      localStorage.setItem("user", query.get("user"));
+      localStorage.setItem("jwt", JSON.stringify(query.get("jwt")));
+      window.history.replaceState({}, document.title, window.location.pathname);
     }
   </script>
-  <title>NewsNow</title>
+
+  <title>RabbitMeow News Now | AI-Powered Breaking News & Sports Updates</title>
 </head>
 
 <body>
