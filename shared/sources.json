@@ -135,12 +135,12 @@
     "interval": 600000,
     "title": "人气榜"
   },
-  "douyin": {
-    "name": "抖音",
+  "aljazeera": {
+    "name": "Aljazeera",
     "type": "hottest",
-    "column": "china",
-    "home": "https://www.douyin.com",
-    "color": "gray",
+    "column": "International",
+    "home": "https://www.aljazeera.com",
+    "color": "orange",
     "interval": 600000
   },
   "hupu": {
