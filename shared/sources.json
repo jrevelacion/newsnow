@@ -153,12 +153,12 @@
     "interval": 600000
   },
   "dongqiudi": {
-    "title": "头条",
-    "name": "懂球帝",
-    "type": "realtime",
-    "column": "sports",
-    "home": "https://www.dongqiudi.com",
-    "color": "green",
+    "title": "Aljazeera",
+    "name": "Aljazeera",
+    "type": "International",
+    "column": "world",
+    "home": "https://www.aljazeera.com",
+    "color": "blue",
     "interval": 600000
   },
   "aihot": {
