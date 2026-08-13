@@ -25,7 +25,7 @@ const nitroOption: Parameters<typeof viteNitro>[0] = {
   imports: {
     dirs: ["server/utils", "shared"],
   },
-  preset: "node-server",
+  preset: process.env.NITRO_PRESET || "node-server",
   alias: {
     "@shared": join(projectDir, "shared"),
     "#": join(projectDir, "server"),
@@ -41,8 +41,8 @@ if (process.env.VERCEL) {
   //     cache: []
   //   },
   // }
-} else if (process.env.CF_PAGES) {
-  nitroOption.preset = "cloudflare-pages"
+} else if (process.env.CF_PAGES || process.env.CF_WORKER) {
+  nitroOption.preset = process.env.CF_PAGES ? "cloudflare-pages" : "cloudflare-module"
   nitroOption.unenv = {
     alias: {
       "safer-buffer": "node:buffer",
