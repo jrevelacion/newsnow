@@ -1,6 +1,6 @@
 {
   "name": "newsnow",
-  "main": "dist/output/public/_worker.js/index.mjs",
+  "main": "dist/server-bundle/index.mjs",
   "compatibility_date": "2024-10-16",
   "compatibility_flags": [
     "nodejs_compat"
