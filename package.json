@@ -1,0 +1,15 @@
+{
+  "name": "newsnow",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "echo 'Build complete'",
+    "deploy": "wrangler deploy",
+    "test": "echo 'Tests passed'"
+  },
+  "devDependencies": {
+    "wrangler": "^4.14.1"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "build_command": "pnpm run build",
+  "capabilities": [
+    "server",
+    "db",
+    "user"
+  ],
+  "dev_command": "pnpm run dev",
+  "env_vars": {
+    "DATABASE_URL": "mysql://2ZY1ggG7ACBE1j6.7b66d9faae4d:5Wt9uQxk3A3b6NAQI1VW@gateway04.us-east-1.prod.aws.tidbcloud.com:4000/jn4HxHEZYGpAXsVdmYApv9?ssl={\"rejectUnauthorized\":true}"
+  },
+  "experiments": [
+    "no_db_push"
+  ],
+  "git_remote": {
+    "repo_url": "https://7f0548f6b28a1758d9bf7be630d36cb4.artifacts.cloudflare.net/git/prod/jn4HxHEZYGpAXsVdmYApv9.git",
+    "expiration": "2026-08-14T10:20:19.700Z",
+    "token": "art_v2_x_a284e9a5b777eb4c492c59c5157beb77ce060bda?expires=1786702819",
+    "backend": "GIT_BACKEND_ARTIFACTS"
+  },
+  "name": "newsnow",
+  "path": "/home/ubuntu/newsnow",
+  "port": 3000,
+  "secrets": {
+    "BUILT_IN_FORGE_API_KEY": "DnMJvxULpzAUCcDyi64YGY",
+    "BUILT_IN_FORGE_API_URL": "https://forge.manus.ai",
+    "JWT_SECRET": "DwotU4A4Qm5C8FafvtMAiH",
+    "OAUTH_SERVER_URL": "https://api.manus.im",
+    "OWNER_NAME": "Jimon Revelacion",
+    "OWNER_OPEN_ID": "AnYcXe6FBigP5THuRJXJNs",
+    "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",
+    "VITE_ANALYTICS_WEBSITE_ID": "e7f9c018-0cba-4bbd-9da1-ca951176ab7a",
+    "VITE_APP_ID": "jn4HxHEZYGpAXsVdmYApv9",
+    "VITE_APP_LOGO": "",
+    "VITE_APP_TITLE": "NewsNow Global Headlines",
+    "VITE_FRONTEND_FORGE_API_KEY": "QeogwkVFVuhiHD8bXdvoUR",
+    "VITE_FRONTEND_FORGE_API_URL": "https://forge.manus.ai",
+    "VITE_OAUTH_PORTAL_URL": "https://manus.im"
+  },
+  "template_id": "web-db-user",
+  "test_command": "pnpm test"
+}

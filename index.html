@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NewsNow — Global News, Tech, & Sports Hub</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Outfit', sans-serif; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-indigo-50/30 to-sky-50/40 min-h-screen text-slate-800 flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200/80 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20">
+          <i class="fa-solid fa-bolt-lightning text-xl"></i>
+        </div>
+        <div>
+          <h1 class="text-2xl font-bold tracking-tight bg-gradient-to-r from-indigo-900 via-violet-900 to-indigo-700 bg-clip-text text-transparent">NewsNow</h1>
+          <p class="text-xs text-slate-500 font-medium">Global Headlines & Real-Time Intelligence</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button id="refresh-btn" onclick="triggerRefresh()" class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer active:scale-95">
+          <i id="refresh-icon" class="fa-solid fa-rotate"></i>
+          <span>Fetch Feeds</span>
+        </button>
+        <button onclick="toggleAboutModal()" class="flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 shadow-sm cursor-pointer">
+          <i class="fa-solid fa-circle-info text-indigo-600"></i>
+          <span>About & Credits</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+    
+    <!-- Search and Filters Bar -->
+    <div class="bg-white/90 backdrop-blur-md rounded-2xl p-4 shadow-xs border border-slate-200/80 mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
+      
+      <!-- Category Tabs -->
+      <div class="flex flex-wrap gap-2 w-full md:w-auto" id="category-tabs">
+        <button onclick="setCategory('all')" class="cat-tab px-4 py-2 rounded-xl text-sm font-medium transition-all bg-indigo-600 text-white shadow-sm cursor-pointer" data-cat="all">All Headlines</button>
+        <button onclick="setCategory('news')" class="cat-tab px-4 py-2 rounded-xl text-sm font-medium transition-all bg-slate-100 hover:bg-slate-200 text-slate-600 cursor-pointer" data-cat="news">News & World</button>
+        <button onclick="setCategory('tech')" class="cat-tab px-4 py-2 rounded-xl text-sm font-medium transition-all bg-slate-100 hover:bg-slate-200 text-slate-600 cursor-pointer" data-cat="tech">Technology</button>
+        <button onclick="setCategory('sports')" class="cat-tab px-4 py-2 rounded-xl text-sm font-medium transition-all bg-slate-100 hover:bg-slate-200 text-slate-600 cursor-pointer" data-cat="sports">Sports</button>
+        <button onclick="setCategory('forums')" class="cat-tab px-4 py-2 rounded-xl text-sm font-medium transition-all bg-slate-100 hover:bg-slate-200 text-slate-600 cursor-pointer" data-cat="forums">Forums</button>
+      </div>
+
+      <!-- Search Input -->
+      <div class="relative w-full md:w-80">
+        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </span>
+        <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="Search headlines or summaries..." class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all">
+      </div>
+
+    </div>
+
+    <!-- Content Layout (Grid + Sidebar) -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      
+      <!-- Articles Grid (3 cols) -->
+      <div class="lg:col-span-3">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-fire text-indigo-600"></i>
+            <span id="feed-heading">Latest Headlines</span>
+            <span id="article-count" class="text-xs bg-indigo-100 text-indigo-700 px-2.5 py-0.5 rounded-full font-semibold">0</span>
+          </h2>
+          <span id="last-updated" class="text-xs text-slate-400">Updated just now</span>
+        </div>
+
+        <div id="articles-container" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- Populated dynamically -->
+          <div class="col-span-full py-16 text-center text-slate-400">
+            <i class="fa-solid fa-spinner fa-spin text-3xl mb-3 text-indigo-600"></i>
+            <p>Loading global headlines...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar (1 col) -->
+      <div class="space-y-6">
+        <!-- Source Health Widget -->
+        <div class="bg-white/90 backdrop-blur-md rounded-2xl p-5 shadow-xs border border-slate-200/80">
+          <h3 class="font-bold text-slate-900 mb-4 flex items-center justify-between">
+            <span class="flex items-center gap-2">
+              <i class="fa-solid fa-shield-halved text-emerald-600"></i>
+              Source Status
+            </span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          </h3>
+          <div id="source-health-list" class="space-y-3 max-h-[420px] overflow-y-auto pr-1">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Quick Tips -->
+        <div class="bg-gradient-to-br from-indigo-900 to-violet-900 text-white rounded-2xl p-5 shadow-md">
+          <h3 class="font-bold mb-2 flex items-center gap-2">
+            <i class="fa-solid fa-bolt text-amber-400"></i>
+            Cloudflare Native
+          </h3>
+          <p class="text-xs text-indigo-200 leading-relaxed">
+            This aggregator runs on Cloudflare Workers and D1 database, delivering instant RSS parsing and high-performance global caching.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200/80 mt-16 py-8">
+    <div class="max-w-7xl mx-auto px-4 text-center text-sm text-slate-500">
+      <p>© 2026 NewsNow Global. Powered by Cloudflare Workers & GitHub.</p>
+    </div>
+  </footer>
+
+  <!-- About Modal -->
+  <div id="about-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in duration-200">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-xl font-bold text-slate-900">About NewsNow & Credits</h3>
+        <button onclick="toggleAboutModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 cursor-pointer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="space-y-4 text-sm text-slate-600 leading-relaxed">
+        <p>
+          <strong>NewsNow</strong> is a high-performance global news aggregator designed to bring together verified headlines, breaking updates, and discussions from the world's most reputable English-language publications.
+        </p>
+        <div class="bg-indigo-50/60 p-4 rounded-2xl border border-indigo-100">
+          <h4 class="font-bold text-indigo-900 mb-1"><i class="fa-solid fa-envelope text-indigo-600 mr-2"></i>Developer & Contact Info</h4>
+          <p class="text-xs text-indigo-800">For issues, feedback, or custom source additions, please reach out to the development team at <strong>support@newsnow-global.com</strong> or visit our GitHub repository.</p>
+        </div>
+        <p class="text-xs text-slate-400">
+          All news items link directly to their original publishers in strict adherence to copyright and fair use standards.
+        </p>
+      </div>
+      <div class="mt-6 flex justify-end">
+        <button onclick="toggleAboutModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-sm font-medium shadow-sm cursor-pointer">Got It</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentCategory = 'all';
+    let searchQuery = '';
+    let allArticles = [];
+    let sourceHealth = {};
+
+    async function fetchData() {
+      try {
+        const [artRes, srcRes] = await Promise.all([
+          fetch(`/api/articles?category=${currentCategory}&search=${encodeURIComponent(searchQuery)}`),
+          fetch('/api/sources')
+        ]);
+        const artData = await artRes.json();
+        const srcData = await srcRes.json();
+
+        allArticles = artData.articles || [];
+        sourceHealth = srcData.health || {};
+
+        renderArticles();
+        renderSourceHealth();
+      } catch (err) {
+        console.error('Failed to fetch data:', err);
+      }
+    }
+
+    async function triggerRefresh() {
+      const icon = document.getElementById('refresh-icon');
+      icon.classList.add('fa-spin');
+      try {
+        const res = await fetch('/api/refresh', { method: 'POST' });
+        const data = await res.json();
+        await fetchData();
+        document.getElementById('last-updated').innerText = 'Updated just now';
+      } catch (err) {
+        console.error('Refresh failed:', err);
+      } finally {
+        icon.classList.remove('fa-spin');
+      }
+    }
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-tab').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.className = 'cat-tab px-4 py-2 rounded-xl text-sm font-medium transition-all bg-indigo-600 text-white shadow-sm cursor-pointer';
+        } else {
+          btn.className = 'cat-tab px-4 py-2 rounded-xl text-sm font-medium transition-all bg-slate-100 hover:bg-slate-200 text-slate-600 cursor-pointer';
+        }
+      });
+      fetchData();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val;
+      fetchData();
+    }
+
+    function renderArticles() {
+      const container = document.getElementById('articles-container');
+      document.getElementById('article-count').innerText = allArticles.length;
+
+      if (allArticles.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-16 text-center text-slate-400 bg-white/50 rounded-2xl border border-slate-200/60">
+            <i class="fa-solid fa-newspaper text-3xl mb-3 text-slate-300"></i>
+            <p class="font-medium text-slate-600">No headlines found</p>
+            <p class="text-xs text-slate-400 mt-1">Try clicking "Fetch Feeds" or clearing your search filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = allArticles.map(article => `
+        <article class="bg-white/90 hover:bg-white backdrop-blur-md rounded-2xl p-5 shadow-xs hover:shadow-md border border-slate-200/80 transition-all duration-200 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <img src="${article.icon}" class="w-4 h-4 rounded-xs object-contain" onerror="this.src='https://www.google.com/s2/favicons?domain=github.com'" />
+                <span class="text-xs font-semibold text-slate-600">${article.sourceName}</span>
+              </div>
+              <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-md font-medium uppercase tracking-wider">${article.category}</span>
+            </div>
+            <h3 class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-2 mb-2 text-base leading-snug">
+              <a href="${article.url}" target="_blank" rel="noopener noreferrer" class="focus:outline-none">
+                ${article.title}
+              </a>
+            </h3>
+            <p class="text-xs text-slate-500 line-clamp-3 leading-relaxed mb-4">
+              ${article.snippet || 'Click through to read the full story on the publisher\'s official website.'}
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-slate-100 text-xs text-slate-400">
+            <span><i class="fa-regular fa-clock mr-1"></i>${new Date(article.publishedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+            <a href="${article.url}" target="_blank" rel="noopener noreferrer" class="font-medium text-indigo-600 hover:text-indigo-700 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+              <span>Read Source</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function renderSourceHealth() {
+      const container = document.getElementById('source-health-list');
+      container.innerHTML = Object.entries(sourceHealth).map(([id, info]) => `
+        <div class="flex items-center justify-between text-xs py-1.5 border-b border-slate-100 last:border-0">
+          <span class="font-medium text-slate-700 capitalize">${id.replace('_', ' ')}</span>
+          <div class="flex items-center gap-2">
+            <span class="text-slate-400">${info.count} items</span>
+            <span class="w-2 h-2 rounded-full ${info.status === 'ok' ? 'bg-emerald-500' : 'bg-rose-500'}"></span>
+          </div>
+        </div>
+      `).join('') || '<div class="text-xs text-slate-400 text-center py-2">No health checks recorded yet. Click Fetch Feeds.</div>';
+    }
+
+    function toggleAboutModal() {
+      const modal = document.getElementById('about-modal');
+      modal.classList.toggle('hidden');
+    }
+
+    // Initial load
+    fetchData();
+    // Auto refresh every 5 mins
+    setInterval(fetchData, 300000);
+  </script>
+</body>
+</html>
