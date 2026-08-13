@@ -5,16 +5,16 @@ import type { ColumnID, HiddenColumnID, Metadata, SourceID } from "./types"
 
 export const columns = {
   china: {
-    zh: "Local",
+    zh: "News",
   },
   world: {
-    zh: "International",
+    zh: "World",
   },
   tech: {
-    zh: "Science & Technology",
+    zh: "Tech",
   },
   finance: {
-    zh: "Finance & Economics",
+    zh: "Finance",
   },
   sports: {
     zh: "Sports",
@@ -29,7 +29,7 @@ export const columns = {
     zh: "Hottest",
   },
   updated: {
-    zh: "Refresh",
+    zh: "Recent",
   },
 } as const
 
