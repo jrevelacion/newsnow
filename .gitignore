@@ -14,3 +14,5 @@ imports.app.d.ts
 package-lock.json
 .specstory/server-dist
 server-dist
+dist/server
+dist/assets
