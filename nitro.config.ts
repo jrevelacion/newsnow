@@ -25,7 +25,7 @@ const nitroOption: Parameters<typeof viteNitro>[0] = {
   imports: {
     dirs: ["server/utils", "shared"],
   },
-  preset: process.env.NITRO_PRESET || "node-server",
+  preset: "cloudflare-module",
   alias: {
     "@shared": join(projectDir, "shared"),
     "#": join(projectDir, "server"),
