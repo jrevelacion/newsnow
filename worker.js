@@ -1,1 +1,1 @@
-export { default } from "./dist/output/public/_worker.js/index.mjs";
+export { default } from "./server-dist/index.mjs";
